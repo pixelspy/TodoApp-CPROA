@@ -10,6 +10,6 @@ export const routes = [
 {
   path: '/user/:id',
   name: 'Users',
-  component: Users
+  component: Users  
 }
 ]
