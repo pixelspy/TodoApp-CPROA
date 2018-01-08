@@ -5,10 +5,20 @@ const cors = require('cors')
 const userController = require('./controller/userController')
 const todoController = require('./controller/todoController')
 const catController = require('./controller/catController')
-const app = express()
-// express est un router: un serveur web : gérer des routes
 
-app.use(cors()); // enables ALL
+/// test pour le pwd
+const pwd = require('./auth/pwd.js')
+pwd
+  .encode('soleil')
+  .then(hash => pwd.compare('soleil', hash))
+  .then( isMatch => console.log(isMatch))
+  .catch(err => console.log(err))
+////
+
+const app = express()
+// express est un router: un serveur web : gérer les routes
+
+app.use(cors()); // enables ALL domain (for now)
 
 app.use(express.json()) //ce middleware express parse le json envoyé en POST
 // pour un formulaire classique le middleware est : express URLencoded

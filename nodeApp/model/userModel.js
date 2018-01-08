@@ -23,4 +23,9 @@ module.exports = {
   getTodosByUserId(id) {
     return client.query(`SELECT todos.name from todos INNER JOIN users_todos ON user_id=${id} AND todos.id = todo_id;`)
   }
+  noExist(email) {
+    return client.query(`
+    SELECT COUNT(*) FROM users WHERE email='${email}'
+    `)
+  }
 }
