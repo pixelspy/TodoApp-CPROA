@@ -8,7 +8,6 @@ const SALT_FACTOR = 5;
  * @returns {string} le password hash
  */
 exports.encode = pwd => new Promise( (resolve, reject) => {
-
   bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
     if (err) {
       return reject(err);
@@ -33,6 +32,7 @@ exports.compare = (pwd, hash) => new Promise( (resolve, reject) => {
 })
 
 exports.comparePassword = (pwdEnClaire, pwdEnHash) => {
+  console.log('pwdEnHash :', pwdEnHash)
   return new Promise( (resolve, reject) => {
     bcrypt.compare( pwdEnClaire, pwdEnHash, (err, result) => {
       if(err) {

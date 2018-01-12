@@ -1,8 +1,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-//Connexion à la BDD :
+// Connexion à la BDD :
 
 const { Client } = require('pg')
-//pg : postrgsql
+// pg : postrgsql, qu'on trouve dans package.json
 // client postrgsql pas client coté serveur
 
 
