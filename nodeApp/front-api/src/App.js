@@ -1,37 +1,35 @@
 import React, { Component } from 'react';
-import Login from './Login';
+import Login from './LoginFake';
+import UserCard from './userCard';
+import Auth from './Auth';
+import AuthButton from './AuthButton';
+import PrivateRoute from './PrivateRoute';
+import Links from './Links';
+import Dashboard from './Dashboard';
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Redirect,
+  withRouter,
+  } from 'react-router-dom';
+import './App.css';
+
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      users: []
-    }
-  };
-  componentDidMount() {
-    const API = 'http://localhost:3003/users';
-    fetch(API).then(res => {
-      // console.log(res)
-      return res.json();
-    })
-    .then(data => {
-      console.log(data)
-      return this.setState({
-        users: data
-      });
-    })
-  }
-
   render() {
-    const {users} = this.state;
+    const loggedin = false;
     return(
       <div>
-        <Login />
-        {users.map((user, index) =>
-          <ul key={index}>
-            <li>{user.firstname} {user.lastname}</li>
-          </ul>
-        )}
+        <Router>
+          <div>
+            <AuthButton />
+            <Links />
+            <Route path="/users" component={UserCard} />
+            <Route exact path="/login" component={Login}/>
+            <PrivateRoute path="/dashboard" component={Dashboard}/>
+          </div>
+        </Router>
       </div>
     );
   }

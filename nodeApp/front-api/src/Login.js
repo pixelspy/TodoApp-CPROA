@@ -1,4 +1,24 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+ } from 'react-router-dom';
+
+const fakeAtuth = {
+  isAuthenticated: false,
+  authenticate(cb) {
+    this.isAuthenticated = true
+    setTimeout(cb, 100) // fake async
+  },
+
+  signout(cb) {
+    this.isAuthenticated = false
+    setTimeout(cb, 100)
+  }
+}
+
 
 class Login extends Component {
   constructor(props) {
@@ -13,9 +33,10 @@ class Login extends Component {
   }
   sendLogin = (event) => {
     let userId;
+    let userProfil;
     event.preventDefault();
     console.log(this.state)
-    // dès qu'on fetch on veut récupéerr des données en JSON
+    // dès qu'on fetch on veut récupérer des données en JSON
     //donc res.json()
     fetch('http://localhost:3003/login', {
       method: 'post',
@@ -26,7 +47,6 @@ class Login extends Component {
       body: JSON.stringify(this.state)
     }).then( res => {
       return res.json()})
-      // console.log("hello :", res);
       .then( json => {
         userId = json.user.id
         console.log(json)
@@ -43,22 +63,12 @@ class Login extends Component {
         .then(res => {
           return res.json()
         }).then(data => {
-          console.log(data)
+          console.log('hello', data)
         })
       })
 
-      //react router v4 : pour changer de page sur le profil de l'user
       // dans un form, pour modifier son profil  --> PUT /user/{id}
 
-
-    // .then(function(response) {
-    //   console.log(response)
-    //   return response.json(response);
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    //   response.send(err);
-    // });
   }
 
 // onSubmit appelle sendLogin
@@ -81,9 +91,7 @@ class Login extends Component {
         <br></br>
           <input type="submit" value="Submit"></input>
         </form>
-
       </div>
-
     );
   }
 }

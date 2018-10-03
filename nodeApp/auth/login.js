@@ -1,15 +1,6 @@
 const user = require("../model/userModel");
 const { compare } = require("./pwd");
 
-// exports.checkCredentials = (email, passwordEnClair) => {
-//   return user
-//     .getUserByEmail(email)
-//     .then( user => { console.log('user : ', user); return user})
-//     .then( user => { return user || Promise.reject({ error: "bad email" })})
-//     .then( user => compare(passwordEnClair, user.password))
-//     .then( isMatch => isMatch || Promise.reject({ error: "bad password" }))
-//     .catch(err => Promise.reject(err));
-// };
 
 /**
  * NB : Je transforme checkCredentials afin de pouvoir renvoyer le user
@@ -24,7 +15,6 @@ const checkCredentials = (email, pwd) => {
     .getUserByEmail(email)
     .then( user => {
       console.log('user : ', user)
-      // console.log('EMAIL :', email)
       return user
     })
     .then(user => user || Promise.reject({ error: "bad email" }))
